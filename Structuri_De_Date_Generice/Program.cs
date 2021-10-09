@@ -8,21 +8,20 @@ namespace Structuri_De_Date_Generice
         {
             BST<int> bst = new BST<int>();
 
-            bst.insert(30);
+            bst.insert(12);
+            bst.insert(10);
+            bst.insert(18);
+            bst.insert(8);
+            bst.insert(11);
+            bst.insert(9);
             bst.insert(15);
-            bst.insert(60);
-            bst.insert(7);
-            bst.insert(22);
+            bst.insert(20);
+            bst.insert(16);
             bst.insert(17);
-            bst.insert(27);
-            bst.insert(45);
-            bst.insert(75);
 
-            //Console.WriteLine(bst.ToString());
+            bst.delete(bst.Root, 15);
 
-
-            bst.inorder(bst.Root);
-
+            bst.preorder(bst.Root);
 
         }
     }

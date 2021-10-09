@@ -111,13 +111,94 @@ namespace Structuri_De_Date_Generice
             inorder(node.Right);
         }
 
-        public void postorder(TreeNode<T> node)
+        public void postorder(TreeNode<T> node) 
         {
             if (node == null)
             {
                 return;
             }
-            
+
+            postorder(node.Left);
+            postorder(node.Right);
+            Console.WriteLine(node.Data);
+        }
+
+        public TreeNode<T> find(TreeNode<T> node, T data)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            else if (node.Data.Equals(data))
+            {
+                return node;
+            }
+            else if (node.Data.CompareTo(data) == 1)
+            {
+                return find(node.Left, data);
+            }
+            else
+            {
+                return find(node.Right, data);
+            }
+        }
+
+        public TreeNode<T> succesor(TreeNode<T> node)
+        {
+            TreeNode<T> current = node.Right;
+
+            while (current != null && current.Left != null)
+            {
+                current = current.Left;
+            }
+
+            return current;
+        }
+
+        public TreeNode<T> delete(TreeNode<T> start, T data)
+        {
+            if (start == null)
+            {
+                return null;
+            }
+            if (data.CompareTo(start.Data) < 0)
+            {
+                start.Left = delete(start.Left, data);
+            }
+            else if (data.CompareTo(start.Data) > 0)
+            {
+                start.Right = delete(start.Right, data);
+            }
+            else
+            {
+                if (start.Left == null)
+                {
+                    TreeNode<T> tmp = start.Right;
+
+                    start = null;
+
+                    return tmp;
+
+
+                }
+
+                if (start.Right == null)
+                {
+                    TreeNode<T> tmp = start.Left;
+
+                    start = null;
+
+                    return tmp;
+
+                }
+
+                TreeNode<T> succ = succesor(start);
+
+                start.Data = succ.Data;
+
+                start.Right = delete(start.Right, succ.Data);
+            }
+            return start;
         }
     }
 }
